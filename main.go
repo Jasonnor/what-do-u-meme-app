@@ -2,13 +2,16 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"what-do-u-meme-app/app"
 )
 
 func SearchByTextMock(writer http.ResponseWriter, request *http.Request) {
-	json_string, _ := json.Marshal("mock search results")
-	writer.Write(json_string)
+	jsonString, _ := json.Marshal("mock search results")
+	if _, err := writer.Write(jsonString); err != nil {
+		fmt.Println(err.Error())
+	}
 }
 
 func main() {
@@ -18,8 +21,7 @@ func main() {
 	http.HandleFunc("/mock/get_trending", app.GetTrendingMock)
 
 	// listen and serve
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
+	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
 }
