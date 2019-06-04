@@ -1,0 +1,98 @@
+{
+  "search_by_text":
+    [
+      {
+        "image_url": "https://picsum.photos/400/300/?random=1",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=1"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=2",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=2"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=3",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=3"
+      },
+      {
+        "image_url": "https://picsum.photos/600/300/?random=4",
+        "title": "test",
+        "item_url": "https://picsum.photos/600/300/?random=4"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=5",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=5"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=6",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=6"
+      },
+      {
+        "image_url": "https://picsum.photos/800/300/?random=7",
+        "title": "test",
+        "item_url": "https://picsum.photos/800/300/?random=7"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=8",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=8"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=9",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=9"
+      }
+    ],
+  "get_trending":
+    [
+      {
+        "image_url": "https://picsum.photos/400/300/?random=1",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=1"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=2",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=2"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=3",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=3"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=4",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=4"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=5",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=5"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=6",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=6"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=7",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=7"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=8",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=8"
+      },
+      {
+        "image_url": "https://picsum.photos/400/300/?random=9",
+        "title": "test",
+        "item_url": "https://picsum.photos/400/300/?random=9"
+      }
+    ]
+}

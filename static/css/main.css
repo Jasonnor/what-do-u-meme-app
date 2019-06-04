@@ -1,0 +1,51 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.textWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textWrap h2{
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+    color:rgb(40, 49, 100);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#searchBtn {
+    background-color: #aaa;
+    color: #fff;
+    font-size: 16px;
+    padding: 12px;
+}
+
+#flexBox{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.image-container {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-container img {
+    height: 250px;
+}
+
+.image-container p {
+    line-height: 20px;
+}
