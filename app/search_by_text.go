@@ -3,35 +3,39 @@ package app
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 )
 
-type searchOutputItem struct {
-	ImageUrl string `json:"image_url"`
-	Title    string `json:"title"`
-	ItemUrl  string `json:"item_url"`
-}
+const searchByTextMockSeed = 1
 
-func SearchByTextMock(writer http.ResponseWriter, request *http.Request) {
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	const numOfResults = 9
-	jsonMockList := createJsonMockList(numOfResults)
+// SearchByTextMock a func to return mock response for search_by_text api
+func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Printf("Error reading body: %v", err)
+		http.Error(w, "can't read body", http.StatusBadRequest)
+		return
+	}
+	fmt.Printf("body length: %d\n", len(body))
+	fmt.Printf("body content:\n%s\n", body)
+
+	var input searchInput
+	err = json.Unmarshal(body, &input)
+	if err != nil {
+		log.Printf("Error unmarshaling search input json string")
+		http.Error(w, "can't unmarshal input json", http.StatusBadRequest)
+		return
+	}
+
+	jsonMockList := createJSONMockList(input.NumOfResult, searchByTextMockSeed)
 	jsonString, _ := json.Marshal(jsonMockList)
-	if _, err := writer.Write(jsonString); err != nil {
-		fmt.Println(err.Error())
+	if _, err := w.Write(jsonString); err != nil {
+		log.Println(err.Error())
+		log.Printf("json content:\n %s\n", jsonString)
+		http.Error(w, "can't write json string to response", http.StatusBadRequest)
 	}
-}
-
-func createJsonMockList(numOfResults int) []searchOutputItem {
-	jsonMockList := make([]searchOutputItem, numOfResults)
-	for i := 0; i < numOfResults; i++ {
-		jsonMock := searchOutputItem{
-			ImageUrl: "https://i.imgflip.com/32hp9x.jpg",
-			Title:    "Batman Slapping Robin",
-			ItemUrl:  "https://imgflip.com/meme/Batman-Slapping-Robin",
-		}
-		jsonMockList[i] = jsonMock
-	}
-
-	return jsonMockList
 }
