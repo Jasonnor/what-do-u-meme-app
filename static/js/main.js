@@ -88,13 +88,11 @@ $(
       function pushImages(url, title) {
         // Build the HTML element
         let htmlText =
-          '<div>' +
           '<img data-caption="' +
           title +
           '" src="' +
           url +
-          '">' +
-          "</div>";
+          '">';
         imageContainer.append(htmlText);
         // Add the Materialize functionality to the images
         // $(".materialboxed").materialbox();

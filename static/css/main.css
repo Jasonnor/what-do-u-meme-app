@@ -30,20 +30,16 @@ input {
     padding: 12px;
 }
 
-#flexBox{
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-}
-
 .image-container {
-    flex-flow: row wrap;
-    display: flex;
-    justify-content: space-between;
+    line-height: auto; 
+    column-count: 5;
+    column-gap: 5px;
+    margin :  50px 20px 0px;
 }
 
 .image-container img {
-    height: 250px;
+    height: auto;
+    width: 100%;
 }
 
 .image-container p {
