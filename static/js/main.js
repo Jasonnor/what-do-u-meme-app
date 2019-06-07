@@ -13,7 +13,7 @@ $(
     //   let perPageCount = 20;
       // variable for current page requested so that when the user scrolls, it is increamented and json is requested
     //   let currentPage = 1;
-      let n_result = 9; 
+      let n_result = 30; 
   
       // SEARCH BTN EVENT LISTENER
       searchBtn.on("click", function() {
@@ -65,7 +65,9 @@ $(
             alert("Failed to load data from API");
             // moreImagesBtn.html("Something Went Wrong");
             console.log(e);
-          }
+          },
+          beforeSend: function() { $('.loader').show();},
+          complete: setTimeout(function() { $('.loader').hide(); }, 1000)
         });
       } // END OF getImageData
   
