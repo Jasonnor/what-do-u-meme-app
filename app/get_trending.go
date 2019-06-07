@@ -23,9 +23,9 @@ func GetTrendingMock(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
 	}
-	query := params["input"][0]
+	// page := params["page"][0]
 
-	jsonMockList := createJSONMockList(numOfResult, query)
+	jsonMockList := createJSONMockList(numOfResult, "dummy")
 	jsonString, _ := json.Marshal(jsonMockList)
 	if _, err := w.Write(jsonString); err != nil {
 		log.Println(err.Error())
