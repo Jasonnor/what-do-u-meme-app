@@ -30,11 +30,19 @@ input {
     padding: 12px;
 }
 
+#trendBtn {
+    background-color: #aaa;
+    color: #fff;
+    font-size: 16px;
+    padding: 12px;
+}
+
 .image-container {
     line-height: auto; 
     column-count: 5;
     column-gap: 5px;
     margin :  50px 20px 0px;
+    float: left;
 }
 
 .image-container img {
