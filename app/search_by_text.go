@@ -8,8 +8,6 @@ import (
 	"strconv"
 )
 
-const searchByTextMockSeed = 3
-
 // SearchByTextMock a func to return mock response for search_by_text api
 func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -25,8 +23,9 @@ func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
 	}
+	query := params["input"][0]
 
-	jsonMockList := createJSONMockList(numOfResult, searchByTextMockSeed)
+	jsonMockList := createJSONMockList(numOfResult, query)
 	jsonString, _ := json.Marshal(jsonMockList)
 	if _, err := w.Write(jsonString); err != nil {
 		log.Println(err.Error())
