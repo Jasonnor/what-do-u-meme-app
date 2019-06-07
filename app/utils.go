@@ -1,5 +1,10 @@
 package app
 
+import (
+	"fmt"
+	"math/rand"
+)
+
 func createJSONMockList(numOfResults int, seed int) []memeItem {
 	if seed == 0 {
 		seed = 1
@@ -18,6 +23,12 @@ func createJSONMockList(numOfResults int, seed int) []memeItem {
 			jsonMock.ImageURL = "https://i.imgflip.com/2/1ur9b0.jpg"
 			jsonMock.Title = "Distracted Boyfriend"
 			jsonMock.ItemURL = "https://imgflip.com/meme/Distracted-Boyfriend"
+		case 3:
+			width := 150 + 50*rand.Intn(8)
+			height := 150 + 50*rand.Intn(8)
+			jsonMock.ImageURL = fmt.Sprintf("http://placecorgi.com/%d/%d", width, height)
+			jsonMock.Title = fmt.Sprintf("Corgi %d x %d (w x h)", width, height)
+			jsonMock.ItemURL = "http://placecorgi.com/"
 		}
 
 		jsonMockList[i] = jsonMock
