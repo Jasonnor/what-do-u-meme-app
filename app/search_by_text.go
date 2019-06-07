@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-const searchByTextMockSeed = 1
+const searchByTextMockSeed = 3
 
 // SearchByTextMock a func to return mock response for search_by_text api
 func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
