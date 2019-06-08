@@ -35,6 +35,7 @@ $(
 
       // TREND BTN EVENT LISTENER
       trendBtn.on("click", function() {
+        imageContainer.html("");
         getTrendingImageData();
       })
   
