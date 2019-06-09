@@ -5,10 +5,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"strconv"
 )
-
-const getTrendingMockSeed = 2
 
 // GetTrendingMock returns a list of meme mock
 func GetTrendingMock(w http.ResponseWriter, r *http.Request) {
@@ -20,13 +17,13 @@ func GetTrendingMock(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "can't parse url raw query", http.StatusBadRequest)
 	}
 
-	numOfResult, err := strconv.Atoi(params["n_result"][0])
+	input, err := parseQueryInput(params)
 	if err != nil {
 		log.Println(err.Error())
-		http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
+		http.Error(w, "can't parse query input from url queries", http.StatusBadRequest)
 	}
 
-	jsonMockList := createJSONMockList(numOfResult, getTrendingMockSeed)
+	jsonMockList := createJSONMockList(input)
 	jsonString, _ := json.Marshal(jsonMockList)
 	if _, err := w.Write(jsonString); err != nil {
 		log.Println(err.Error())
