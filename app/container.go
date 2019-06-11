@@ -18,6 +18,7 @@ type trendingInput struct {
 }
 
 type memeDetail struct {
+	ID       int      `json:"id"`
 	Title    string   `json:"title"`
 	ImageURL string   `json:"image_url"`
 	About    string   `json:"about"`
