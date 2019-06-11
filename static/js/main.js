@@ -82,7 +82,7 @@ $(
       function getTrendingImageData() {
         $.ajax({
           type: "GET",
-          url: `http://localhost:8080/mock/get_trending?n_result=${n_result}&page=${currentPage}`,
+          url: `/mock/get_trending?n_result=${n_result}&page=${currentPage}`,
           success: function(data) {
             // Call the handle Data function and pass the response
             data = JSON.parse(data);
