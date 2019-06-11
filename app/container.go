@@ -16,3 +16,10 @@ type trendingInput struct {
 	NumOfResult int `json:"n_result"`
 	Page        int `json:"page"`
 }
+
+type memeDetail struct {
+	Title    string   `json:"title"`
+	ImageURL string   `json:"image_url"`
+	About    string   `json:"about"`
+	Tags     []string `json:"tags,omitempty"`
+}
