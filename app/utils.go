@@ -5,14 +5,14 @@ import (
 	"math/rand"
 )
 
-func createJSONMockList(numOfResults int, seed int) []memeItem {
+func createJSONMockList(numOfResults int, seed int) []memeIcon {
 	if seed == 0 {
 		seed = 1
 	}
 
-	jsonMockList := make([]memeItem, numOfResults)
+	jsonMockList := make([]memeIcon, numOfResults)
 	for i := 0; i < numOfResults; i++ {
-		var jsonMock memeItem
+		var jsonMock memeIcon
 
 		switch seed {
 		case 1:

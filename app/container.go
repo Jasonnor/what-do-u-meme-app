@@ -1,7 +1,6 @@
 package app
 
-// TODO @jeff: change memeItem into memeIcon
-type memeItem struct {
+type memeIcon struct {
 	ImageURL string `json:"image_url"`
 	Title    string `json:"title"`
 	ItemURL  string `json:"item_url"`
