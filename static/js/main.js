@@ -5,6 +5,8 @@ $(
       let userInput = $("#userInput");
       // Search Btn
       let searchBtn = $("#searchBtn");
+      // Trend Btn
+      let trendBtn = $("#trendBtn");
       // More Images btn
       let moreImagesBtn = $("#moreImagesBtn");
       // Result Image area
@@ -12,12 +14,12 @@ $(
       // Count of returned results
     //   let perPageCount = 20;
       // variable for current page requested so that when the user scrolls, it is increamented and json is requested
-    //   let currentPage = 1;
-      let n_result = 9; 
+      let currentPage = 1;
+      let n_result = 30; 
   
       // SEARCH BTN EVENT LISTENER
       searchBtn.on("click", function() {
-        // Clear exisitng images
+        // Clear existing images
         // imageContainer.html("");
         validateInput();
       }); // end of SEARCH BTN EVENT LISTENER
@@ -30,6 +32,12 @@ $(
           validateInput();
         }
       }); // end of USER SEARCH SUBMIT [ENTER BTN] EVENT LISTENER
+
+      // TREND BTN EVENT LISTENER
+      trendBtn.on("click", function() {
+        imageContainer.html("");
+        getTrendingImageData();
+      });
   
     //   // MORE IMAGES BTN
     //   moreImagesBtn.on("click", function() {
@@ -55,7 +63,7 @@ $(
       function getImageData(query) {
         $.ajax({
           type: "GET",
-          url: `http://localhost:8080/mock/search_by_text?input=${query}&n_result=${n_result}`,
+          url: `http://localhost:8080/mock/search_by_text?input=${query}&n_result=${n_result}&page=${currentPage}`,
           success: function(data) {
             // Call the handle Data function and pass the response
             data = JSON.parse(data);
@@ -65,7 +73,28 @@ $(
             alert("Failed to load data from API");
             // moreImagesBtn.html("Something Went Wrong");
             console.log(e);
-          }
+          },
+          beforeSend: function() { $('.loader').show();},
+          complete: setTimeout(function() { $('.loader').hide(); }, 1000)
+        });
+      } // END OF getImageData
+
+      function getTrendingImageData() {
+        $.ajax({
+          type: "GET",
+          url: `http://localhost:8080/mock/get_trending?n_result=${n_result}&page=${currentPage}`,
+          success: function(data) {
+            // Call the handle Data function and pass the response
+            data = JSON.parse(data);
+            handleData(data);
+          },
+          error: function(e) {
+            alert("Failed to load data from API");
+            // moreImagesBtn.html("Something Went Wrong");
+            console.log(e);
+          },
+          beforeSend: function() { $('.loader').show();},
+          complete: setTimeout(function() { $('.loader').hide(); }, 1000)
         });
       } // END OF getImageData
   
@@ -84,21 +113,17 @@ $(
         // moreImagesBtn.slideDown();
       } // END OF handleData
   
-      // Built HTML tempate and push the images to the webpage
+      // Built HTML template and push the images to the webpage
       function pushImages(url, title) {
         // Build the HTML element
-        let htmlText =
-          '<div>' +
-          '<img data-caption="' +
-          title +
-          '" src="' +
-          url +
-          '">' +
-          "</div>";
+        let htmlText = `<img alt="${title}" src="${url}">`;
         imageContainer.append(htmlText);
         // Add the Materialize functionality to the images
         // $(".materialboxed").materialbox();
       } // END OF pushImages
+
+      trendBtn.trigger("click");
+
     })() // end of self self executing anonymous function
   );
   
