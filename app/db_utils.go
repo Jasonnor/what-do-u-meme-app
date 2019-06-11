@@ -23,11 +23,6 @@ func connectDB(driver string, login string) (*sql.DB, error) {
 	return db, nil
 }
 
-func mockConnectDB(driver string, login string) (*sql.DB, error) {
-	var db *sql.DB
-	return db, nil
-}
-
 func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 	var memes []memeDetail
 
