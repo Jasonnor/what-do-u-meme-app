@@ -14,9 +14,6 @@
     background-color: rgb(245, 243, 243); 
 }
 
-#textBox {
-}
-
 .textWrap h2{
     text-align: center;
     padding: 20px;
@@ -46,10 +43,9 @@ input {
 }
 
 .image-container {
-    line-height: auto; 
     column-count: 5;
     column-gap: 5px;
-    margin :  100px 20px 0px;
+    margin :  100px 20px 0;
     float: left;
 }
 

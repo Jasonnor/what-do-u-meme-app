@@ -19,7 +19,7 @@ $(
   
       // SEARCH BTN EVENT LISTENER
       searchBtn.on("click", function() {
-        // Clear exisitng images
+        // Clear existing images
         // imageContainer.html("");
         validateInput();
       }); // end of SEARCH BTN EVENT LISTENER
@@ -37,7 +37,7 @@ $(
       trendBtn.on("click", function() {
         imageContainer.html("");
         getTrendingImageData();
-      })
+      });
   
     //   // MORE IMAGES BTN
     //   moreImagesBtn.on("click", function() {
@@ -113,15 +113,10 @@ $(
         // moreImagesBtn.slideDown();
       } // END OF handleData
   
-      // Built HTML tempate and push the images to the webpage
+      // Built HTML template and push the images to the webpage
       function pushImages(url, title) {
         // Build the HTML element
-        let htmlText =
-          '<img data-caption="' +
-          title +
-          '" src="' +
-          url +
-          '">';
+        let htmlText = `<img alt="${title}" src="${url}">`
         imageContainer.append(htmlText);
         // Add the Materialize functionality to the images
         // $(".materialboxed").materialbox();
