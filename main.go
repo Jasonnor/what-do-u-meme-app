@@ -14,9 +14,10 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// add func to handle url request
 	http.HandleFunc("/", mainPage)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/mock/search_by_text", app.SearchByTextMock)
 	http.HandleFunc("/mock/get_trending", app.GetTrendingMock)
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.HandleFunc("/mock/get_meme_details", app.GetMemeDetailsMock)
 
 	// listen and serve
 	if err := http.ListenAndServe(":8080", nil); err != nil {
