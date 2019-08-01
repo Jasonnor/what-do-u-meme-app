@@ -3,13 +3,21 @@ package app
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/lib/pq"
 	"log"
 	"strings"
 )
 
-func connectDB(driver string, login string) (*sql.DB, error) {
+func connectDB() (*sql.DB, error) {
 	var db *sql.DB
-	db, openErr := sql.Open(driver, login)
+	connectString := `
+		user=postgres 
+		password=meme 
+		host=35.192.115.150 
+		dbname=meme-db 
+		sslmode=disable 
+	`
+	db, openErr := sql.Open("postgres", connectString)
 	if openErr != nil {
 		log.Fatal(openErr)
 		return db, openErr
@@ -33,19 +41,19 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 		SELECT
 			meme.id,
 			meme.title,
-			meme.img_path,
+			meme.image_path,
 			meme.about,
-			tags.name
+			tag.name
 		FROM
 			meme
 		LEFT JOIN
-			meme_tags
+			meme_tag
 		ON
-			meme.id = meme_tags.meme_id
+			meme.id = meme_tag.meme_id
 		INNER JOIN
-			tags
+			tag
 		ON
-			meme_tags.tags_id = tags.id
+			meme_tag.tag_id = tag.id
 		WHERE
 			id IN(%s)
 		`,
