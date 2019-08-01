@@ -46,12 +46,12 @@ func SearchByText(w http.ResponseWriter, r *http.Request) {
 	//}
 
 	// numOfResult, err := strconv.Atoi(params["n_result"][0])
-	//if err != nil {
-	//	log.Println(err.Error())
-	//	http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
-	//}
 
 	db, err := connectDB()
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "connect db error", http.StatusBadRequest)
+	}
 	memeIds := []int{1, 2}
 	memes, err := getMemesByIds(db, memeIds)
 	jsonString, _ := json.Marshal(memes)
