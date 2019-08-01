@@ -17,7 +17,7 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/mock/search_by_text", app.SearchByTextMock)
 	http.HandleFunc("/mock/get_trending", app.GetTrendingMock)
-	http.HandleFunc("/mock/get_meme_details", app.GetMemeDetailsMock)
+	// http.HandleFunc("/mock/get_meme_details", app.GetMemeDetailsMock)
 	http.HandleFunc("/search_by_text", app.SearchByText)
 
 	// listen and serve
