@@ -39,11 +39,11 @@ func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
 func SearchByText(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	params, err := url.ParseQuery(r.URL.RawQuery)
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, "can't parse url raw query", http.StatusBadRequest)
-	}
+	//params, err := url.ParseQuery(r.URL.RawQuery)
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, "can't parse url raw query", http.StatusBadRequest)
+	//}
 
 	// numOfResult, err := strconv.Atoi(params["n_result"][0])
 	//if err != nil {
