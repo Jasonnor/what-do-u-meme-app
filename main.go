@@ -18,6 +18,7 @@ func main() {
 	http.HandleFunc("/mock/search_by_text", app.SearchByTextMock)
 	http.HandleFunc("/mock/get_trending", app.GetTrendingMock)
 	http.HandleFunc("/mock/get_meme_details", app.GetMemeDetailsMock)
+	http.HandleFunc("/search_by_text", app.SearchByText)
 
 	// listen and serve
 	if err := http.ListenAndServe(":8080", nil); err != nil {
