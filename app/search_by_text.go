@@ -45,11 +45,11 @@ func SearchByText(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "can't parse url raw query", http.StatusBadRequest)
 	}
 
-	numOfResult, err := strconv.Atoi(params["n_result"][0])
-	if err != nil {
-		log.Println(err.Error())
-		http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
-	}
+	// numOfResult, err := strconv.Atoi(params["n_result"][0])
+	//if err != nil {
+	//	log.Println(err.Error())
+	//	http.Error(w, "can't convert n_result from string to int", http.StatusBadRequest)
+	//}
 
 	db, err := connectDB()
 	memeIds := []int{1, 2}
