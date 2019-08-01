@@ -52,7 +52,7 @@ func SearchByText(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "connect db error", http.StatusBadRequest)
 	}
-	memeIds := []int{1, 2}
+	memeIds := []int{2, 3}
 	memes, err := getMemesByIds(db, memeIds)
 	jsonString, _ := json.Marshal(memes)
 

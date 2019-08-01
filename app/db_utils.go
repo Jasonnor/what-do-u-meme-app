@@ -5,6 +5,7 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	"log"
+	"strconv"
 	"strings"
 )
 
@@ -35,6 +36,9 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 	var memes []memeDetail
 
 	sqlFormats := make([]string, len(memeIds))
+	for i := range sqlFormats {
+		sqlFormats[i] = strconv.Itoa(memeIds[i])
+	}
 	sqlFmtStr := strings.Join(sqlFormats, ",")
 	sqlQuery := fmt.Sprintf(
 		`
@@ -55,18 +59,19 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 		ON
 			meme_tag.tag_id = tag.id
 		WHERE
-			id IN(%s)
+			meme.id IN(%s)
 		`,
 		sqlFmtStr)
 
-	rows, queryErr := db.Query(sqlQuery, memeIds)
+	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
-		log.Fatal(queryErr)
+		log.Print(queryErr)
 		return memes, queryErr
 	}
 	defer rows.Close()
 
-	var IDToMemeMap map[int]memeDetail
+	IDToMemeMap := make(map[int]memeDetail)
+
 	for rows.Next() {
 		var (
 			id    int
