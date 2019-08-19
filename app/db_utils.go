@@ -65,7 +65,6 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
-		log.Print(queryErr)
 		return memes, queryErr
 	}
 	defer rows.Close()
@@ -87,7 +86,6 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 			&about,
 			&tag)
 		if err != nil {
-			log.Fatal(err)
 			return memes, err
 		}
 
@@ -109,7 +107,6 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rowErr := rows.Err()
 	if rowErr != nil {
-		log.Fatal(rowErr)
 		return memes, rowErr
 	}
 
