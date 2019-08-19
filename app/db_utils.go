@@ -32,6 +32,11 @@ func connectDB() (*sql.DB, error) {
 	return db, nil
 }
 
+func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
+	var memeIds []int
+	return memeIds, nil
+}
+
 func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 	var memes []memeDetail
 
