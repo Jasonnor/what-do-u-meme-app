@@ -39,23 +39,37 @@ func SearchByTextMock(w http.ResponseWriter, r *http.Request) {
 func SearchByText(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	//params, err := url.ParseQuery(r.URL.RawQuery)
-	//if err != nil {
-	//	log.Println(err.Error())
-	//	http.Error(w, "can't parse url raw query", http.StatusBadRequest)
-	//}
+	params, err := url.ParseQuery(r.URL.RawQuery)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "can't parse url raw query", http.StatusBadRequest)
+	}
 
-	// numOfResult, err := strconv.Atoi(params["n_result"][0])
+	input, err := parseQueryInput(params)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "can't parse query input from url queries", http.StatusBadRequest)
+	}
 
 	db, err := connectDB()
 	if err != nil {
 		log.Println(err.Error())
 		http.Error(w, "connect db error", http.StatusBadRequest)
 	}
-	memeIds := []int{2, 3}
-	memes, err := getMemesByIds(db, memeIds)
-	jsonString, _ := json.Marshal(memes)
 
+	memeIds, err := getMemeIdsByKeyword(db, input)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "get ids by keyword error", http.StatusBadRequest)
+	}
+
+	memes, err := getMemesByIds(db, memeIds)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "get memes by ids error", http.StatusBadRequest)
+	}
+
+	jsonString, _ := json.Marshal(memes)
 	if _, err := w.Write(jsonString); err != nil {
 		log.Println(err.Error())
 		log.Printf("json content:\n %s\n", jsonString)
