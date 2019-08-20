@@ -6,8 +6,8 @@ type memeIcon struct {
 	ItemURL  string `json:"item_url"`
 }
 
-type searchInput struct {
-	Input       string `json:"input"`
+type queryInput struct {
+	Input       string `json:"input,omitempty"`
 	NumOfResult int    `json:"n_result"`
 	Page        int    `json:"page"`
 }
