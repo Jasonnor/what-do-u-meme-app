@@ -116,7 +116,7 @@ $(
       // Built HTML template and push the images to the webpage
       function pushImages(url, title) {
         // Build the HTML element
-        let htmlText = `<img alt="${title}" src="${url}">`;
+        let htmlText = `<div><img alt="${title}" src="${url}"><a>${title}</a></div>`;
         imageContainer.append(htmlText);
         // Add the Materialize functionality to the images
         // $(".materialboxed").materialbox();
