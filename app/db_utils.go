@@ -34,10 +34,45 @@ func connectDB() (*sql.DB, error) {
 
 func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 	var memeIds []int
+
+	sqlQuery := fmt.Sprintf(
+		`
+		SELECT 
+			meme.id
+		FROM 
+			meme
+		WHERE 
+			meme.about LIKE '%%%s%%'
+		`,
+		input.Input)
+	rows, queryErr := db.Query(sqlQuery)
+	if queryErr != nil {
+		log.Println(queryErr.Error())
+		return memeIds, queryErr
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var id int
+		err := rows.Scan(&id)
+		if err != nil {
+			log.Println(err.Error())
+			return memeIds, err
+		}
+		memeIds = append(memeIds, id)
+	}
+
+	rowErr := rows.Err()
+	if rowErr != nil {
+		log.Println(rowErr.Error())
+		return memeIds, rowErr
+	}
+
 	return memeIds, nil
 }
 
 func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
+	// TODO: check if memeIds empty
 	var memes []memeDetail
 
 	sqlFormats := make([]string, len(memeIds))
@@ -70,6 +105,7 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
+		log.Println(queryErr.Error())
 		return memes, queryErr
 	}
 	defer rows.Close()
@@ -112,6 +148,7 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rowErr := rows.Err()
 	if rowErr != nil {
+		log.Println(rowErr.Error())
 		return memes, rowErr
 	}
 
