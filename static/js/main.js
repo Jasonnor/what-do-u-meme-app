@@ -63,7 +63,7 @@ $(
       function getImageData(query) {
         $.ajax({
           type: "GET",
-          url: `/mock/search_by_text?input=${query}&n_result=${n_result}&page=${currentPage}`,
+          url: `/search_by_text?input=${query}&n_result=${n_result}&page=${currentPage}`,
           success: function(data) {
             // Call the handle Data function and pass the response
             data = JSON.parse(data);
