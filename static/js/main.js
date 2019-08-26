@@ -63,10 +63,10 @@ $(
       function getImageData(query) {
         $.ajax({
           type: "GET",
-          url: `/mock/search_by_text?input=${query}&n_result=${n_result}&page=${currentPage}`,
+          url: `http://localhost:3000/search_by_text?input=${query}&n_result=${n_result}&page=${currentPage}`,
           success: function(data) {
             // Call the handle Data function and pass the response
-            data = JSON.parse(data);
+            // data = JSON.parse(data);
             handleData(data);
           },
           error: function(e) {
@@ -82,10 +82,10 @@ $(
       function getTrendingImageData() {
         $.ajax({
           type: "GET",
-          url: `/mock/get_trending?n_result=${n_result}&page=${currentPage}`,
+          url: `http://localhost:3000/get_trending?n_result=${n_result}&page=${currentPage}`,
           success: function(data) {
             // Call the handle Data function and pass the response
-            data = JSON.parse(data);
+            // data = JSON.parse(data);
             handleData(data);
           },
           error: function(e) {
@@ -104,26 +104,44 @@ $(
         data.forEach(function(currentPhoto, index, array) {
           // Image URL > Will be built and made an link
           let photoURL = currentPhoto.image_url;
-          // alt text
           let title = currentPhoto.title;
+          let id = currentPhoto.id;
+          let about = currentPhoto.about;
+          let tags = currentPhoto.tags;
           // plug the data to page
-          pushImages(photoURL, title);
+          pushImages(photoURL, title, id, about, tags);
         });
         //show the more btn
         // moreImagesBtn.slideDown();
       } // END OF handleData
   
       // Built HTML template and push the images to the webpage
-      function pushImages(url, title) {
+      function pushImages(url, title, id, about, tags) {
         // Build the HTML element
-        let htmlText = `<div><img alt="${title}" src="${url}"><a>${title}</a></div>`;
+        let htmlText = `<div>
+                          <img id="${id}" data-title="${title}" src="${url}" data-about="${about}" data-tags="${tags}" onClick="openEditBox()">
+                          <a>${title}</a>
+                        </div>`;
         imageContainer.append(htmlText);
         // Add the Materialize functionality to the images
         // $(".materialboxed").materialbox();
       } // END OF pushImages
 
+      // window.addEventListener('load', openEditBox);
       trendBtn.trigger("click");
 
     })() // end of self self executing anonymous function
   );
+
+function openEditBox() {
+  let pic_id = event.srcElement.id;
+  document.getElementById("detail-pic").src = document.getElementById(pic_id).src;
+  document.getElementById("detail-title").innerHTML = document.getElementById(pic_id).getAttribute("data-title");
+  document.getElementById("detail-about").innerHTML = document.getElementById(pic_id).getAttribute("data-about");
+  document.getElementById("detail-tags").innerHTML = document.getElementById(pic_id).getAttribute("data-tags");
+  document.getElementById('detail-box').style.display= "block";
+  document.getElementById('detail-cancel-btn').onclick = function() {
+      document.getElementById('detail-box').style.display= "none";
+  }
+}
   
