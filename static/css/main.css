@@ -73,8 +73,8 @@ input {
 }
 
 #detail-content {
-    width: 350px;
-    height: 350px; 
+    width: 400px;
+    height: 450px; 
     background-color: #fff;
     position: absolute;
     top: 0;
@@ -83,6 +83,8 @@ input {
     right: 0;
     margin: auto;
     padding: 25px;
+    border-radius: 5px;
+
 }
 
 #detail-box {
@@ -91,6 +93,43 @@ input {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(66,66,66,0.6);
+    background-color: rgba(66,66,66,0.9);
     display: none;
+}
+
+#detail-cancel-btn{
+    font-size: 25px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 2%;
+    background: none;
+    cursor: pointer;
+}
+
+#detail-cancel-btn:hover{
+    color: #17a2b8;
+}
+
+#detail-title{
+    font-size: 24px;
+}
+
+#detail-tags{
+    padding: 5px 0px;
+}
+
+
+.tag{
+    margin-right: 10px;
+    border: 1px solid #17a2b8;
+    padding: 0px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tag:hover{
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
 }

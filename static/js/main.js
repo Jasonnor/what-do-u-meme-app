@@ -138,7 +138,14 @@ function openEditBox() {
   document.getElementById("detail-pic").src = document.getElementById(pic_id).src;
   document.getElementById("detail-title").innerHTML = document.getElementById(pic_id).getAttribute("data-title");
   document.getElementById("detail-about").innerHTML = document.getElementById(pic_id).getAttribute("data-about");
-  document.getElementById("detail-tags").innerHTML = document.getElementById(pic_id).getAttribute("data-tags");
+  tags = document.getElementById(pic_id).getAttribute("data-tags").split(",");
+  tags_container = $("#detail-tags");
+  tags_container.html("");
+  tags.forEach(function(tag){
+      let htext = `<span class=tag>${tag}</span>`;
+      tags_container.append(htext);
+  });
+  
   document.getElementById('detail-box').style.display= "block";
   document.getElementById('detail-cancel-btn').onclick = function() {
       document.getElementById('detail-box').style.display= "none";
