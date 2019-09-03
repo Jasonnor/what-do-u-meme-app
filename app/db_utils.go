@@ -3,7 +3,7 @@ package app
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // postgres driver
 	"log"
 	"strconv"
 	"strings"
