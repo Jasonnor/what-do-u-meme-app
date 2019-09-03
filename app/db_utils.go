@@ -23,6 +23,7 @@ func connectDB() (*sql.DB, error) {
 		log.Fatal(openErr)
 		return db, openErr
 	}
+	defer db.Close()
 
 	if err := db.Ping(); err != nil {
 		log.Fatal(err)
