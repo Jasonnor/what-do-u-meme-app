@@ -20,13 +20,13 @@ func connectDB() (*sql.DB, error) {
 	`
 	db, openErr := sql.Open("postgres", connectString)
 	if openErr != nil {
-		log.Fatal(openErr)
+		log.Println("[connectDB]: open db error, " + openErr.Error())
 		return db, openErr
 	}
 	defer db.Close()
 
 	if err := db.Ping(); err != nil {
-		log.Fatal(err)
+		log.Println("[connectDB]: ping error, " + err.Error())
 		return db, err
 	}
 
@@ -48,7 +48,7 @@ func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 		input.Input)
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
-		log.Println(queryErr.Error())
+		log.Println("[getMemeIdsByKeyword]: db query error, " + queryErr.Error())
 		return memeIds, queryErr
 	}
 	defer rows.Close()
@@ -57,7 +57,7 @@ func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 		var id int
 		err := rows.Scan(&id)
 		if err != nil {
-			log.Println(err.Error())
+			log.Println("[getMemeIdsByKeyword]: rows next error, " + err.Error())
 			return memeIds, err
 		}
 		memeIds = append(memeIds, id)
@@ -65,7 +65,7 @@ func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 
 	rowErr := rows.Err()
 	if rowErr != nil {
-		log.Println(rowErr.Error())
+		log.Println("[getMemeIdsByKeyword]: rows error, " + rowErr.Error())
 		return memeIds, rowErr
 	}
 
@@ -106,7 +106,7 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
-		log.Println(queryErr.Error())
+		log.Println("[getMemesByIds]: db query error, " + queryErr.Error())
 		return memes, queryErr
 	}
 	defer rows.Close()
@@ -149,7 +149,7 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 
 	rowErr := rows.Err()
 	if rowErr != nil {
-		log.Println(rowErr.Error())
+		log.Println("[getMemesByIds]: rows error, " + rowErr.Error())
 		return memes, rowErr
 	}
 

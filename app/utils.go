@@ -47,7 +47,7 @@ func parseQueryInput(params map[string][]string) (queryInput, error) {
 
 	numOfResult, err := strconv.Atoi(params["n_result"][0])
 	if err != nil {
-		log.Println(err.Error())
+		log.Println("[parseQueryInput]: convert n_result string to integer error, " + err.Error())
 	}
 
 	pages, exists := params["page"]
@@ -55,7 +55,7 @@ func parseQueryInput(params map[string][]string) (queryInput, error) {
 	if exists {
 		page, err = strconv.Atoi(pages[0])
 		if err != nil {
-			log.Println(err.Error())
+			log.Println("[parseQueryInput]: convert page string to integer error, " + err.Error())
 			return input, errors.New("fail to convert page to int")
 		}
 	}
