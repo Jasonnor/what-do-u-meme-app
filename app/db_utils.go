@@ -44,8 +44,16 @@ func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 			meme
 		WHERE 
 			meme.about LIKE '%%%s%%'
+		LIMIT
+			%d
+		OFFSET
+			%d
 		`,
-		input.Input)
+		input.Input,
+		input.NumOfResult,
+		(input.Page-1)*input.NumOfResult)
+
+	log.Println("[getMemeIdsByKeyword]: db query: " + sqlQuery)
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
 		log.Println("[getMemeIdsByKeyword]: db query error, " + queryErr.Error())
