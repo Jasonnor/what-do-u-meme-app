@@ -24,7 +24,7 @@ func connectDB() (*sql.DB, error) {
 		log.Println("[connectDB]: open db error, " + openErr.Error())
 		return db, openErr
 	}
-	defer db.Close()
+	//defer db.Close()
 
 	if err := db.Ping(); err != nil {
 		log.Println("[connectDB]: ping error, " + err.Error())
