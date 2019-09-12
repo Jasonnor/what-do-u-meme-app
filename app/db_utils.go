@@ -2,6 +2,7 @@ package app
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	_ "github.com/lib/pq" // postgres driver
 	"log"
@@ -81,8 +82,11 @@ func getMemeIdsByKeyword(db *sql.DB, input queryInput) ([]int, error) {
 }
 
 func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
-	// TODO: check if memeIds empty
 	var memes []memeDetail
+	if len(memeIds) > 0 {
+		log.Println("[getMemesByIds]: get empty list memeIds")
+		return memes, errors.New("get empty list memeIds")
+	}
 
 	sqlFormats := make([]string, len(memeIds))
 	for i := range sqlFormats {
