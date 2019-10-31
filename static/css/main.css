@@ -7,6 +7,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: rgb(245, 243, 243); 
 }
 
 .textWrap h2{
@@ -30,22 +35,39 @@ input {
     padding: 12px;
 }
 
-#flexBox{
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
+#trendBtn {
+    background-color: #aaa;
+    color: #fff;
+    font-size: 16px;
+    padding: 12px;
 }
 
 .image-container {
-    flex-flow: row wrap;
-    display: flex;
-    justify-content: space-between;
+    column-count: 5;
+    column-gap: 5px;
+    margin :  100px 20px 0;
+    float: left;
 }
 
 .image-container img {
-    height: 250px;
+    height: auto;
+    width: 100%;
 }
 
 .image-container p {
     line-height: 20px;
+}
+
+.loader {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
 }

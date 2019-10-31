@@ -4,30 +4,28 @@
 <head>
   <title>What-do-you-meme</title>
   <link rel="stylesheet" href="./static/css/main.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://kit.fontawesome.com/9aee15779b.js"></script>
 </head>
 
 <body>
 
   <div class="textWrap">
-    <div id="textBox">
-
+    <!-- <div id="textBox"> -->
       <h2>What-do-you-meme</h2>
       <input id="userInput" type="text" placeholder="Find your meme.." name="search">
       <button id="searchBtn" type="submit"><i class="fas fa-search"></i></button>
-      <button id="searchBtn" type="submit"><i class="fab fa-hotjar"></i></button>
-    </div>
+      <button id="trendBtn" type="submit"><i class="fab fa-hotjar"></i></button>
+    <!-- </div> -->
   </div>
 
-  <div id="flexBox"> 
-    <div class="image-container">
-    </div>
+  <div class="loader"></div>
+  <div class="image-container">
   </div>
 
 
 </body>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/9aee15779b.js"></script>
 <script type="text/javascript" src="./static/js/main.js"></script>
 
 </html>

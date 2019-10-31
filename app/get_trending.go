@@ -2,36 +2,28 @@ package app
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
-
-const getTrendingMockSeed = 2
 
 // GetTrendingMock returns a list of meme mock
 func GetTrendingMock(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	body, err := ioutil.ReadAll(r.Body)
+	params, err := url.ParseQuery(r.URL.RawQuery)
 	if err != nil {
-		log.Printf("Error reading body: %v", err)
-		http.Error(w, "can't read body", http.StatusBadRequest)
-		return
-	}
-	fmt.Printf("body length: %d\n", len(body))
-	fmt.Printf("body content:\n%s\n", body)
-
-	var input trendingInput
-	err = json.Unmarshal(body, &input)
-	if err != nil {
-		log.Printf("Error unmarshaling search input json string")
-		http.Error(w, "can't unmarshal input json", http.StatusBadRequest)
-		return
+		log.Println(err.Error())
+		http.Error(w, "can't parse url raw query", http.StatusBadRequest)
 	}
 
-	jsonMockList := createJSONMockList(input.NumOfResult, getTrendingMockSeed)
+	input, err := parseQueryInput(params)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "can't parse query input from url queries", http.StatusBadRequest)
+	}
+
+	jsonMockList := createJSONMockList(input)
 	jsonString, _ := json.Marshal(jsonMockList)
 	if _, err := w.Write(jsonString); err != nil {
 		log.Println(err.Error())
