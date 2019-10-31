@@ -47,6 +47,7 @@ func SearchByText(w http.ResponseWriter, r *http.Request) {
 		log.Println("[SearchByText]: parse query input error, " + err.Error())
 		http.Error(w, "can't parse query input from url queries", http.StatusBadRequest)
 	}
+	log.Println("[SearchByText]: get input ", input)
 
 	db, err := connectDB()
 	if err != nil {
@@ -65,6 +66,7 @@ func SearchByText(w http.ResponseWriter, r *http.Request) {
 		log.Println("[SearchByText]: get memes by ids error, " + err.Error())
 		http.Error(w, "get memes by ids error", http.StatusBadRequest)
 	}
+	log.Println("[SearchByText]: response output ", memes)
 
 	jsonString, _ := json.Marshal(memes)
 	if _, err := w.Write(jsonString); err != nil {
