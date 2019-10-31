@@ -116,6 +116,7 @@ func getMemesByIds(db *sql.DB, memeIds []int) ([]memeDetail, error) {
 		`,
 		sqlFmtStr)
 
+	log.Println("[getMemesByIds]: db query: " + sqlQuery)
 	rows, queryErr := db.Query(sqlQuery)
 	if queryErr != nil {
 		log.Println("[getMemesByIds]: db query error, " + queryErr.Error())
